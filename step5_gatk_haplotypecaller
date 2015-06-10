@@ -1,0 +1,41 @@
+#!/bin/bash
+
+fastq_digest=$1
+step=step5_gatk_haplotypecaller
+exe=do_step5_gatk_haplotypecaller
+F=/home/yqin/201504_TargetReseq/FromMarisa/Pipeline/yue
+interval_folder=$F/sg_haplotypecaller_2014_new_interval
+
+while read line
+
+do
+
+        s=`echo $line | awk -F' ' '{print $1}'`
+
+        outdir=$F/results/$s/Out
+        logdir=$F/results/$s/Log
+        jobdir=$F/results/$s/Job
+	
+	job=$jobdir/$step.$s.job
+	mkdir $outdir/sg_haplotypecall_vcf
+	
+
+        if [ -e $job ]; then
+                echo "$job already exists"
+
+        else
+		for i in `ls $interval_folder`
+		do
+			
+			sleep 2
+                	qsub -e $logdir -o $logdir -N $step -R y $F/$exe $outdir $outdir/sg_haplotypecall_vcf $s $s.$i $interval_folder/$i > $job
+             
+                	cat $job
+		
+		done
+        fi
+
+
+
+done < $fastq_digest
+

@@ -1,0 +1,29 @@
+#!/bin/bash
+
+vcf_input=$1
+out_folder=$2
+out_fname=$3
+step=step8_gatk_genotypevcf
+exe=do_step8_gatk_genotypevcf
+F=$4
+
+
+outdir=$F/$out_folder/Out
+logdir=$F/$out_folder/Log
+jobdir=$F/$out_folder/Job
+
+job=$jobdir/$step.$out_name.job
+
+
+        if [ -e $job ]; then
+                echo "$job already exists"
+
+        else
+		sleep 2
+                qsub -e $logdir -o $logdir -N $step -R y $F/$exe $vcf_input $outdir $out_fname > $job
+             
+                cat $job
+        fi
+
+
+

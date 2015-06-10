@@ -1,0 +1,31 @@
+#!/bin/bash
+#$ -S /bin/sh
+#$ -l h_data=20G,h_rt=10:00:00
+
+
+time1=$( date "+%s" )
+
+echo [Directory] `pwd`
+echo [Machine] `uname -n`
+echo [Start] `date`
+echo [args] $*
+
+export PATH=/share/apps/samtools-1.1/bin:$PATH
+
+vcf_file=$1
+outdir=$2
+fname=$3
+ref=/coppolalabshares/marisaprj01/Takeda/Pipeline/reference/human_g1k_v37.no_unlocalized_contigs.fasta
+
+echo "Running:"
+echo "gatk genotype gvcf"
+
+java -Xmx8g -Xms4g -Djava.io.tmpdir=/home/yqin/201505_ExomeSeq/tmp -jar /home/yqin/bin/GenomeAnalysisTK.jar -T GenotypeGVCFs -o $outdir/$fname.genotypeGVCF.vcf -V $vcf_file -R $ref -nda
+
+
+time2=$( date "+%s" )
+echo [deltat] $(( $time2 - $time1 ))
+echo [End] `date`
+
+
+

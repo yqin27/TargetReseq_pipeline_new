@@ -1,0 +1,18 @@
+#!/bin/bash
+
+echo 'step5 jobs finish '
+grep End results/*/Log/step5*.o*|wc
+
+
+
+
+echo 'step jobs no errors on files'
+grep "UnmappedReadFilter" results/*/Log/step5*.e*|wc
+#grep "UnmappedReadFilter" results/*/Log/step5*.e*
+
+
+
+
+echo 'step5 jobs killed on files'
+grep Killed results/*/Log/step5*.e*|wc
+grep Killed results/*/Log/step5*.e*

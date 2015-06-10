@@ -1,0 +1,18 @@
+#!/bin/bash
+
+echo 'step4 jobs finish '
+grep End results/*/Log/step4*.o*|wc
+
+
+
+
+echo 'step4 jobs no errors on files'
+grep "MalformedReadFilter" results/*/Log/step4*.e*|wc
+#grep "picard.sam.markduplicates.MarkDuplicates done" results/*/Log/step4*.e*
+
+
+
+
+echo 'step4 jobs killed on files'
+grep Killed results/*/Log/step4*.e*|wc
+grep Killed results/*/Log/step4*.e*

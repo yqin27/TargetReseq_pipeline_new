@@ -1,0 +1,18 @@
+#!/bin/bash
+
+echo 'step2 jobs finish '
+grep End results/*/Log/step2*.o*|wc
+
+
+
+
+echo 'step2 jobs no errors on files'
+grep "picard.sam.markduplicates.MarkDuplicates done" results/*/Log/step2*.e*|wc
+#grep "picard.sam.markduplicates.MarkDuplicates done" results/*/Log/step2*.e*
+
+
+
+
+echo 'step2 jobs killed on files'
+grep Killed results/*/Log/step2*.e*|wc
+grep Killed results/*/Log/step2*.e*

@@ -1,0 +1,45 @@
+#!/bin/bash
+#$ -S /bin/sh
+#$ -l h_data=4G,h_rt=3:00:00
+
+
+time1=$( date "+%s" )
+
+echo [Directory] `pwd`
+echo [Machine] `uname -n`
+echo [Start] `date`
+echo [args] $*
+
+export PATH=/share/apps/samtools-1.1/bin:$PATH
+
+output_dir=$1
+haplotypecall_vcf_folder=$2
+s=$3
+ref=/coppolalabshares/marisaprj01/Takeda/Pipeline/reference/human_g1k_v37.no_unlocalized_contigs.fasta
+vcf=/coppolalabshares/marisaprj01/Takeda/Pipeline/dbSNP/dbsnp_138.b37.vcf
+
+
+echo "Running:"
+echo "gatk individual gvcf"
+
+
+java -Xms2g -Xmx6g -jar /home/yqin/bin/GenomeAnalysisTK.jar -T CombineGVCFs -o $output_dir/$s.haplotypecaller.vcf \
+-V $haplotypecall_vcf_folder/$s.sg0.haplotypecaller.vcf \
+-V $haplotypecall_vcf_folder/$s.sg1.haplotypecaller.vcf \
+-V $haplotypecall_vcf_folder/$s.sg2.haplotypecaller.vcf \
+-V $haplotypecall_vcf_folder/$s.sg3.haplotypecaller.vcf \
+-V $haplotypecall_vcf_folder/$s.sg4.haplotypecaller.vcf \
+-V $haplotypecall_vcf_folder/$s.sg5.haplotypecaller.vcf \
+-V $haplotypecall_vcf_folder/$s.sg6.haplotypecaller.vcf \
+-V $haplotypecall_vcf_folder/$s.sg7.haplotypecaller.vcf \
+-V $haplotypecall_vcf_folder/$s.sg8.haplotypecaller.vcf \
+-V $haplotypecall_vcf_folder/$s.sg9.haplotypecaller.vcf \
+-V $haplotypecall_vcf_folder/$s.sg10.haplotypecaller.vcf \
+-V $haplotypecall_vcf_folder/$s.sg11.haplotypecaller.vcf \
+-V $haplotypecall_vcf_folder/$s.sg12.haplotypecaller.vcf -R $ref
+
+
+
+time2=$( date "+%s" )
+echo [deltat] $(( $time2 - $time1 ))
+echo [End] `date`
