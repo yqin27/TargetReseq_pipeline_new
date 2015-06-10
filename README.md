@@ -1,4 +1,6 @@
-Takeda new pipeline running by steps
+# Takeda new pipeline 
+
+Pipeline runs by steps using shell(insted of python)
 
 run ./step1 var1 var2 ...
 
