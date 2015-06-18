@@ -1,3 +1,31 @@
+#===============================================================================
+#
+#          FILE:  step1_bwa_aln
+#         USAGE:  ./step1_bwa_aln digest_fastq_file exe_folder
+#   DESCRIPTION: 
+#       OPTIONS:  ---
+#  REQUIREMENTS:  ---
+#          BUGS:  ---
+#         NOTES:  ---
+#        AUTHOR:  Yue Qin, YQin@mednet.ucla.edu
+#       COMPANY: ICNN, UCLA
+#       CREATED:  ---
+#      REVISION: 06/10/2015
+
+#   reference file versions:
+#   reference genome: human_g1k_v37.no_unlocalized_contigs.fasta(ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/,1000genome project, v37, 5/17/10)
+#   dbsnp database: dbsnp_138.b37.vcf(build 138, 04/25/13)
+#   target region files: 2014.Takeda.new.intervals
+#   if exome sequencing, using target region files: SeqCap_EZ_Exome_v3_primary.bed.intervals(SeqCap EZ Human Exome Library v3.0 download from http://www.nimblegen.com/products/seqcap/ez/v3/index.html)
+
+#   software versions:(running exome sequencing 2015-9075)
+#   bwa-0.7.12
+#   picard-tools-1.130
+#   samtools-1.1
+#   GenomeAnalysisTK-3.3-0
+#===============================================================================
+
+
 #!/bin/bash
 
 fastq_digest=$1
